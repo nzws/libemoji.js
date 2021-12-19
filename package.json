@@ -1,0 +1,51 @@
+{
+  "name": "@nzws/libemoji.js",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "description": "Unofficial nodejs wrapper for emoji-gen/libemoji",
+  "author": "Yuzuki Aida <dev@nzws.me>",
+  "repository": "https://github.com/nzws/libemoji.js",
+  "prettier": "@nzws/prettier-config",
+  "packageManager": "yarn@3.1.1",
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^4.2.0"
+  },
+  "devDependencies": {
+    "@nzws/prettier-config": "^1.0.1",
+    "@types/bindings": "^1.5.1",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0",
+    "node-gyp": "^8.4.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.5.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  },
+  "files": [
+    "dist",
+    "lib",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "setup:submodules": "git submodule update --init --recursive",
+    "setup:libemoji": "sh ./scripts/setup-libemoji.sh",
+    "setup:native-configure": "node-gyp configure",
+    "setup:python-install": "pip install -r ./requirements.txt",
+    "setup": "npm-run-all 'setup:*'",
+    "lint:prettier": "prettier --check .",
+    "lint:tsc": "tsc --noEmit",
+    "lint:eslint": "eslint --cache --ignore-path .gitignore '**/*.ts'",
+    "lint:cpp": "cpplint src/native/**/*.cpp",
+    "lint": "npm-run-all -p 'lint:*'",
+    "format": "prettier --write --ignore-path .gitignore .",
+    "build:gyp": "node-gyp build",
+    "build:ts": "tsc",
+    "build": "npm-run-all 'build:*'"
+  }
+}

@@ -1,0 +1,61 @@
+name: Node CI
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [16.x]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2.4.0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install nodejs deps
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Setup native modules
+        run: yarn setup
+
+      - name: Run linter
+        run: yarn lint
+
+  test:
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [16.x]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2.4.0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install deps
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Setup native modules
+        run: yarn setup
+
+      - name: Run build
+        run: yarn build
+
+      - name: Run test
+        run: yarn test
