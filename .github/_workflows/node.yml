@@ -1,0 +1,30 @@
+name: Node CI
+
+on: push
+
+jobs:
+  lint-and-test:
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [16.x]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2.4.0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install nodejs deps
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - run: yarn setup
+      - run: yarn lint
+      - run: yarn build:ts
+      - run: yarn test:ts
