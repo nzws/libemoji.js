@@ -33,7 +33,8 @@ yarn add @nzws/libemoji.js # or npm i @nzws/libemoji.js
 ```
 # Initialize
 asdf install python 2.7.18
-sudo apt install libgl-dev # for ubuntu 20.04
+sudo apt install clang-format # for ubuntu 20.04
+
 yarn
 yarn setup
 
