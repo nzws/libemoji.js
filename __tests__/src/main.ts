@@ -12,8 +12,8 @@ describe('binary', () => {
 
   test('size', () => {
     const { buffer } = generate('emo\nji', {
-      width: 1024,
-      height: 1024
+      width: 512,
+      height: 512
     });
 
     expect(buffer).toMatchImageSnapshot();
