@@ -19,20 +19,20 @@ jobs:
           node-version: 16.x
           cache: 'yarn'
 
+      - name: Install deps
+        run: yarn install --immutable --check-cache
+      - run: yarn setup
+
       - run: echo "::set-output name=HASH::$(git submodule status externals/libemoji | awk '{print $1}')"
         id: submodule_hash
       - uses: actions/cache@v2
         with:
-        path: |
-          externals/libemoji/bin
-          externals/libemoji/lib
-          externals/libemoji/CMakeFiles
-        key: ${{ runner.os }}-${{ steps.submodule_hash.outputs.HASH }}
+          path: |
+            externals/libemoji/bin
+            externals/libemoji/lib
+            externals/libemoji/CMakeFiles
+          key: ${{ runner.os }}-${{ steps.submodule_hash.outputs.HASH }}
 
-      - name: Install deps
-        run: yarn install --immutable --check-cache
-
-      - run: yarn setup
       - run: yarn prebuild
       - run: yarn build
       - run: yarn publish
