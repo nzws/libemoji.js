@@ -22,7 +22,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install nodejs deps
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install --immutable
 
       - run: yarn setup
       - run: yarn lint

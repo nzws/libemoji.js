@@ -24,7 +24,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install deps
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install --immutable
 
       - run: yarn setup
       - run: yarn prebuild
