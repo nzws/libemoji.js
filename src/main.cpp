@@ -1,7 +1,9 @@
 #include <napi.h>
+
 #include <cstdlib>
 #include <iostream>
 #include <string>
+
 #include "emoji.h"
 
 using namespace std;
