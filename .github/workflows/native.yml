@@ -5,14 +5,16 @@ on:
     paths:
       - externals/**
       - src/**
+      - __tests__/src/**
   pull_request:
     paths:
       - externals/**
       - src/**
+      - __tests__/src/**
 
 jobs:
   lint-and-test:
-    timeout-minutes: 30
+    timeout-minutes: 60
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -22,12 +24,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2.4.0
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.5.1
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '2.x'
+      - uses: actions/setup-node@v2.5.1
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
+
+      - run: echo "::set-output name=HASH::$(git submodule status externals/libemoji | awk '{print $1}')"
+        id: submodule_hash
+      - uses: actions/cache@v2
+        with:
+          path: |
+            externals/libemoji/bin
+            externals/libemoji/lib
+            externals/libemoji/CMakeFiles
+          key: ${{ runner.os }}-${{ steps.submodule_hash.outputs.HASH }}
 
       - name: Install nodejs deps
         run: yarn install --immutable --check-cache

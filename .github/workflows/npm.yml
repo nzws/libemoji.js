@@ -6,22 +6,28 @@ on:
 
 jobs:
   publish:
-    timeout-minutes: 30
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node-version: [16.x]
-
-    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2.4.0
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.5.1
+      - uses: actions/setup-python@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          python-version: '2.x'
+      - uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16.x
           cache: 'yarn'
+
+      - run: echo "::set-output name=HASH::$(git submodule status externals/libemoji | awk '{print $1}')"
+        id: submodule_hash
+      - uses: actions/cache@v2
+        with:
+        path: |
+          externals/libemoji/bin
+          externals/libemoji/lib
+          externals/libemoji/CMakeFiles
+        key: ${{ runner.os }}-${{ steps.submodule_hash.outputs.HASH }}
 
       - name: Install deps
         run: yarn install --immutable --check-cache
