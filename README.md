@@ -60,6 +60,6 @@ void (async () => {
 asdf install python 2.7.18
 sudo apt install clang-format # for linux
 
-yarn
+SKIP_BUILD=true yarn
 yarn setup
 ```

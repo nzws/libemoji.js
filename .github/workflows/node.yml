@@ -23,6 +23,8 @@ jobs:
 
       - name: Install nodejs deps
         run: yarn install --immutable --check-cache
+        env:
+          SKIP_BUILD: true
 
       - run: yarn lint
       - run: yarn build:ts

@@ -34,6 +34,8 @@ jobs:
 
       - name: Install deps
         run: yarn install --immutable --check-cache
+        env:
+          SKIP_BUILD: true
 
       - run: echo "::set-output name=HASH::$(git submodule status externals/libemoji | awk '{print $1}')"
         id: submodule_hash

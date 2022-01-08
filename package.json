@@ -56,7 +56,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "install": "prebuild-install --runtime napi",
+    "install": "node ./scripts/skip-prebuild.js || prebuild-install --runtime napi",
     "rebuild": "node-gyp rebuild",
     "prebuild": "prebuild --runtime napi --all --strip --verbose",
     "upload": "prebuild --runtime napi --upload ${GITHUB_TOKEN}",
@@ -77,8 +77,6 @@
     "build": "npm-run-all 'build:*'",
     "start": "ts-node example",
     "clean": "node-gyp clean",
-    "prepublishOnly": "yarn build && echo '!lib' >> externals/libemoji/.gitignore",
-    "postpublish": "sed -i -e '/!lib/d' externals/libemoji/.gitignore",
     "test:ts": "jest ./__tests__/lib/**/*.ts",
     "test:cpp": "jest ./__tests__/src/**/*.ts",
     "test": "npm-run-all -p 'test:*'"
