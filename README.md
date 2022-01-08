@@ -62,5 +62,4 @@ sudo apt install clang-format # for linux
 
 yarn
 yarn setup
-yarn prebuild
 ```

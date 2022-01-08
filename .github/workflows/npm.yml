@@ -41,8 +41,11 @@ jobs:
       - if: steps.submodule_cache.outputs.cache-hit == 'true'
         run: yarn setup:native-configure
 
-      - run: yarn prebuild
       - run: yarn build
+      - run: yarn prebuild
+      - run: yarn upload
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

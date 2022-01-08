@@ -50,6 +50,5 @@ jobs:
         run: yarn setup:native-configure
 
       - run: yarn lint
-      - run: yarn prebuild
       - run: yarn build
       - run: yarn test:cpp

@@ -19,7 +19,7 @@
         "<!@(node -p \"require('node-addon-api').include\")",
         "./externals/libemoji/include"
       ],
-      'defines': [ 'NAPI_DISABLE_CPP_EXCEPTIONS' ],
+      'defines': [ 'NAPI_DISABLE_CPP_EXCEPTIONS', "NAPI_VERSION=<(napi_build_version)" ],
     }
   ]
 }

@@ -24,7 +24,6 @@ jobs:
       - name: Install nodejs deps
         run: yarn install --immutable --check-cache
 
-      - run: yarn setup
       - run: yarn lint
       - run: yarn build:ts
       - run: yarn test:ts

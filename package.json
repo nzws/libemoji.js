@@ -2,11 +2,18 @@
   "name": "@nzws/libemoji.js",
   "version": "0.1.0",
   "main": "dist/index.js",
-  "gypfile": true,
   "license": "MIT",
   "description": "Unofficial nodejs wrapper for emoji-gen/libemoji",
   "author": "Yuzuki Aida <dev@nzws.me>",
-  "repository": "https://github.com/nzws/libemoji.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nzws/libemoji.js.git"
+  },
+  "binary": {
+    "napi_versions": [
+      8
+    ]
+  },
   "prettier": "@nzws/prettier-config",
   "packageManager": "yarn@3.1.1",
   "publishConfig": {
@@ -14,7 +21,8 @@
   },
   "dependencies": {
     "bindings": "^1.5.0",
-    "node-addon-api": "^4.2.0"
+    "node-addon-api": "^4.2.0",
+    "prebuild-install": "^7.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
@@ -34,6 +42,7 @@
     "jest-image-snapshot": "^4.5.1",
     "node-gyp": "^8.4.1",
     "npm-run-all": "^4.1.5",
+    "prebuild": "^11.0.0",
     "prettier": "^2.5.1",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
@@ -41,14 +50,16 @@
   "files": [
     "dist",
     "src",
-    "externals/libemoji/include",
-    "externals/libemoji/lib",
     "binding.gyp",
     "package.json",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
+    "install": "prebuild-install --runtime napi",
+    "rebuild": "node-gyp rebuild",
+    "prebuild": "prebuild --runtime napi --all --strip --verbose",
+    "upload": "prebuild --runtime napi --upload ${GITHUB_TOKEN}",
     "setup:submodules": "git submodule update --init --recursive",
     "setup:native-configure": "node-gyp configure",
     "setup": "npm-run-all 'setup:*'",
@@ -60,7 +71,7 @@
     "format": "npm-run-all -p 'format:*'",
     "format:prettier": "prettier --write .",
     "format:cpp": "clang-format -i src/**/*.cpp",
-    "prebuild": "sh ./scripts/setup-libemoji.sh",
+    "build:native": "sh ./scripts/setup-libemoji.sh",
     "build:gyp": "node-gyp build",
     "build:ts": "tsc",
     "build": "npm-run-all 'build:*'",
