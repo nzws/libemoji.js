@@ -5,6 +5,10 @@ on:
     paths:
       - externals/**
       - src/**
+  pull_request:
+    paths:
+      - externals/**
+      - src/**
 
 jobs:
   lint-and-test:
