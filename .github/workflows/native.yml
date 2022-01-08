@@ -32,19 +32,22 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
 
-      - name: Install nodejs deps
+      - name: Install deps
         run: yarn install --immutable --check-cache
-      - run: yarn setup
 
       - run: echo "::set-output name=HASH::$(git submodule status externals/libemoji | awk '{print $1}')"
         id: submodule_hash
       - uses: actions/cache@v2
+        id: submodule_cache
         with:
           path: |
-            externals/libemoji/bin
-            externals/libemoji/lib
-            externals/libemoji/CMakeFiles
-          key: ${{ runner.os }}-${{ steps.submodule_hash.outputs.HASH }}
+            externals/libemoji
+          key: ${{ runner.os }}-libemoji-${{ steps.submodule_hash.outputs.HASH }}
+
+      - if: steps.submodule_cache.outputs.cache-hit != 'true'
+        run: yarn setup
+      - if: steps.submodule_cache.outputs.cache-hit == 'true'
+        run: yarn setup:native-configure
 
       - run: yarn lint
       - run: yarn prebuild
