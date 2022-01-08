@@ -3,8 +3,8 @@ name: Native CI
 on:
   push:
     paths:
-      - externals
-      - src
+      - externals/**
+      - src/**
 
 jobs:
   lint-and-test:
