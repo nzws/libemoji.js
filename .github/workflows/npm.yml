@@ -25,7 +25,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Install deps
-        run: yarn install --immutable --check-cache
+        run: yarn install --frozen-lockfile
         env:
           SKIP_BUILD: true
 
