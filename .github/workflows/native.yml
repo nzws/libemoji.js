@@ -1,16 +1,6 @@
 name: Native CI
 
-on:
-  push:
-    paths:
-      - externals/**
-      - src/**
-      - __tests__/src/**
-  pull_request:
-    paths:
-      - externals/**
-      - src/**
-      - __tests__/src/**
+on: [push, pull_request]
 
 jobs:
   lint-and-test:

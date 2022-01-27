@@ -47,7 +47,7 @@ void (async () => {
 ### Requirements
 
 - Node.js v16
-  - yarn v2
+- yarn v1
 - CMake
 - Python 2.7 (recommend to use [asdf](https://github.com/asdf-vm/asdf))
 - C11 Compiler
