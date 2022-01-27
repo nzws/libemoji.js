@@ -76,8 +76,8 @@
     "build": "npm-run-all 'build:*'",
     "start": "ts-node example",
     "clean": "node-gyp clean",
-    "test:ts": "jest ./__tests__/lib/**/*.ts",
-    "test:cpp": "jest ./__tests__/src/**/*.ts",
+    "test:ts": "jest ./__tests__/lib/**.ts",
+    "test:cpp": "jest ./__tests__/src/**.ts",
     "test": "npm-run-all -p 'test:*'"
   }
 }
