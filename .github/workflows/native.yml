@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '2.x'
-      - uses: actions/setup-node@v2.5.1
+      - uses: actions/setup-node@v3.3.0
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
