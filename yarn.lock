@@ -2321,6 +2321,11 @@ detect-libc@^1.0.3:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
+detect-libc@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-2.0.1.tgz#e1897aa88fa6ad197862937fbc0441ef352ee0cd"
+  integrity sha512-463v3ZeIrcWtdgIg6vI6XUncguvr2TnGl4SzDXinkt9mSLpBJKXT3mW6xT3VQdDN11+WVs29pgvivTc4Lp8v+w==
+
 detect-newline@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
@@ -4851,12 +4856,12 @@ prebuild-install@^7.0.0:
     tunnel-agent "^0.6.0"
 
 prebuild@^11.0.0:
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/prebuild/-/prebuild-11.0.1.tgz#ae81dcbf874c9da491800cd79a88922012dde84f"
-  integrity sha512-Kx9pm8exKo3LcQeMLH7Qxqoju6bllZkBAWXXABDyK82i3IQuw0/2klJPILf0TIPkS6GHUIsUgxkRfdm1lIdFyA==
+  version "11.0.4"
+  resolved "https://registry.yarnpkg.com/prebuild/-/prebuild-11.0.4.tgz#5e4a0659e2b98219ad58808b356c7938b0f9e326"
+  integrity sha512-n23Rzql2m8ldFpwcFyouGUrg9VByEF2IroEZlNvPLiQwTJWucTNxIaZEoyVe2AxPRzQb6Eph2ytObxVWm4FA7Q==
   dependencies:
     cmake-js "~5.2.0"
-    detect-libc "^1.0.3"
+    detect-libc "^2.0.0"
     each-series-async "^1.0.1"
     execspawn "^1.0.1"
     ghreleases "^3.0.2"
